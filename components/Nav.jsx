@@ -34,7 +34,7 @@ const Nav = () => {
                     className="object-contain"
                 /> <p className="logo_text">rewars</p>
             </Link>
-
+ 
             {/* Desktop Nav */}
             <div className="sm:flex hidden">
                 {session?.user ? (
