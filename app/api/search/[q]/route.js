@@ -15,4 +15,4 @@ export const GET = async (req, {params}) => {
         return new Response ("Nie udało się zadać pytania", {status: 500})
     }
 }
-
+export const dynamic = 'force-dynamic'
