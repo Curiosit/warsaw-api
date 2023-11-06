@@ -10,12 +10,13 @@ const ProductCardList = ({ data, handleTagClick}) => {
   console.log(data);
   if(data){
     return (
-      <div className="mt-16 prompt_layout">
+      <div className="mt-0 prompt_layout">
         {data.map((product) => (
           <ProductCard 
           
           key={product.Nazwa}
           product={product}
+          
           handleTagClick={handleTagClick}
           />
         ))}
@@ -47,9 +48,10 @@ const Feed = () => {
     const searchResult = await filterProducts(e.target.value);
     setMostCommonType(findMostCommonType(searchResult))
     console.log(searchResult);
+    console.log(mostCommonType);
     setSearchedResults(searchResult);
-    setImagePath(switchImagePath(mostCommonType));
-    
+    setImagePath(switchImagePath(findMostCommonType(searchResult)));
+    console.log(imagePath);
   };
   const handleTagClick = (tagName) => {
     
@@ -102,6 +104,7 @@ const Feed = () => {
   };
 
   function switchImagePath(value) {
+    console.log(value)
     switch (value) {
       case "Papier":
         return "papier.png";
@@ -125,7 +128,7 @@ const Feed = () => {
     // Iterate through the JSON data
     data.forEach(function (entry) {
       const type = entry.Typ;
-  
+      console.log(type);
       // If the type is not in the count object, initialize it with a count of 1
       if (!typeCount[type]) {
         typeCount[type] = 1;
@@ -148,7 +151,8 @@ const Feed = () => {
     // Check if there is more than one type
     const uniqueTypes = Object.keys(typeCount).length;
     setMoreTypes(uniqueTypes > 1);
-  
+    console.log(uniqueTypes);
+    console.log(mostCommonType);
     return mostCommonType;
   }
 
@@ -194,8 +198,9 @@ const Feed = () => {
                         <Image
                             src={"/images/categories/"+imagePath}
                             alt='user_image'
-                            width={50}
-                            height={50}
+                            key={new Date().getTime()}
+                            width={100}
+                            height={100}
                             className='rounded-full object-contain'
                         />
                   </div>
