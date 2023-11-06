@@ -39,7 +39,7 @@ const ProductCard = ({ key, product, handleEdit, handleDelete, handleTagClick })
                {product.Nazwa} 
             </h3>
             <p className='font-inter text-sm text-gray-500'>
-               {product.Typ}
+               wyrzuć do: {product.Typ}
             </p>
           </div>
         </div>
@@ -54,7 +54,7 @@ const ProductCard = ({ key, product, handleEdit, handleDelete, handleTagClick })
         className='font-inter text-sm blue_gradient cursor-pointer'
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
-        {product.Synonim}
+        Inne nazwy tego produktu to: {product.Synonim}
       </p>
 
       

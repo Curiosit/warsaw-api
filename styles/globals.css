@@ -178,6 +178,10 @@ body {
   @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/90 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
 }
 
+.answer_card {
+  @apply break-inside-avoid rounded-lg border border-gray-300 bg-white/90 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter w-full h-fit;
+}
+
 .flex-center {
   @apply flex justify-center items-center;
 }

@@ -8,9 +8,9 @@ const Home = () => {
         rewars
         <br className="">
         </br>
-        <span className="green_gradient text-center"> Sprawdź jak ponownie wykorzystać wszystko!</span>
+        <span className="green_gradient text-center">Zapytaj do którego kontenera wyrzucić</span>
       </h1>
-      <p className="desc text-center">albo dowiedz się do którego kontenera wyrzucić...
+      <p className="desc text-center">
       </p>
      <Feed />
     </section>
