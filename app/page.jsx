@@ -1,11 +1,17 @@
 
 import Feed from "@components/Feed"
-
+import Image from 'next/image'
 const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
+      <Image src="/images/logo.png"
+                    alt="quotr logo"
+                    width={90}
+                    height={90}
+                    className="object-contain spin"
+                />
       <h1 className="head_text text-center">
-        rewars
+       re/wars
         <br className="">
         </br>
         <span className="green_gradient text-center">Zapytaj do którego kontenera wyrzucić</span>
