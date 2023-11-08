@@ -111,7 +111,7 @@ body {
 }
 
 .head_text {
-  @apply mt-5 text-5xl font-satoshi leading-[1.15] text-black sm:text-6xl;
+  @apply mt-3 text-5xl font-satoshi leading-[1.15] text-black sm:text-6xl;
 }
 
 .orange_gradient {
@@ -135,7 +135,7 @@ body {
 }
 
 .quote_btn {
-  @apply w-7 h-7 rounded-full   flex justify-center items-center cursor-pointer;
+  @apply w-12 h-12 rounded-full   flex justify-center items-center cursor-pointer;
 }
 
 .glassmorphism {
@@ -148,7 +148,7 @@ body {
 
 /* Feed Component */
 .feed {
-  @apply mt-16 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
+  @apply mt-2 mx-auto w-full max-w-xl flex justify-center items-center flex-col gap-2;
 }
 
 /* Form Component */

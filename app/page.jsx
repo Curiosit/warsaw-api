@@ -14,7 +14,7 @@ const Home = () => {
        re/wars
         <br className="">
         </br>
-        <span className="green_gradient text-center">Zapytaj do którego kontenera wyrzucić</span>
+        <span className="green_gradient text-center">Gdzie wyrzucić?</span>
       </h1>
       <p className="desc text-center">
       </p>
