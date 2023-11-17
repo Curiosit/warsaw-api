@@ -24,12 +24,12 @@ const Nav = () => {
 
         <nav className="flex-between w-full mb-2 pt-3">
             <Link href="/" className="flex gap-2 flex-center">
-                <Image src="/images/logo.png"
+                {/* <Image src="/images/logo.png"
                     alt="quotr logo"
                     width={30}
                     height={30}
                     className="object-contain spin"
-                /> <p className="logo_text">re/wars</p>
+                /> <p className="logo_text">re/wars</p> */}
             </Link>
  
             {/* Desktop Nav */}

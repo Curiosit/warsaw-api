@@ -5,8 +5,8 @@ import Provider from '@components/Provider';
 
 
 export const metadata = {
-  title: "rewars",
-  description: "użyj ponownie!"
+  title: "re/wars.ai",
+  description: "użyj ponownie! wszystko!"
 }
 
 const RootLayout = ({children}) => {

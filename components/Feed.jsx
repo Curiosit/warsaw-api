@@ -35,6 +35,7 @@ const ProductCardList = ({ data, handleTagClick}) => {
 
 const Feed = () => {
   
+
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [searchTimeout, setSearchTimeout] = useState(null);
@@ -156,6 +157,60 @@ const Feed = () => {
     return mostCommonType;
   }
 
+  async function eventAskAI () {
+    const headers = {
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          
+      }
+  
+    }
+    const apiAIUrl = 'https://cyz7bkwwhl.execute-api.us-west-2.amazonaws.com/production/askai';
+    var description = '';
+    description = searchText;
+    //description = JSON.stringify(describeBuilding(building));
+    const responsefield=document.getElementById("airesponse");
+    const secondPart = generatePrompt();
+    const ask = secondPart + description ;
+    
+    const question = { "question": ask};
+    const jsonQuestion = JSON.stringify(question);
+    const jsonBody = JSON.stringify({body : question});
+    console.log(jsonQuestion);
+    responsefield.innerHTML = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...";
+    const response = await fetch(apiAIUrl, {method: 'POST', body: jsonQuestion}, headers);
+    console.log(response);
+    var body = await response.text();
+    console.log(body);
+    
+    responsefield.innerHTML = body;
+  }
+
+  function generatePrompt () {
+    const rand = getRandomInt(1);
+    console.log(rand);
+        if (rand == 0) {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            
+        } else if (rand == 1) {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+        } else if (rand == 2) {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+        } else if (rand == 3) {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+        } else if (rand == 4) {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+        }else {
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+        }
+    
+  }
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   
 
   return (
@@ -170,6 +225,37 @@ const Feed = () => {
         />
 
       </form>
+      <div>
+              <div className='answer_card' >
+                <div className='flex justify-between items-start gap-5'>
+                  <div
+                    className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+                
+                  >
+                    <div className='flex flex-col'>
+                      <h3 className='font-satoshi font-semibold text-gray-900'>
+
+                      </h3>
+                      <p id="airesponse" className='font-inter text-sm text-gray-500'>
+                      Zapytaj bota re/wars.ai o poradę jak ponownie wykorzystać ten materiał - klikając w obrazek po prawej!
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <div className='quote_btn' >
+                        <Image
+                            src={"/images/aibot.png"}
+                            alt='user_image'
+                            key={new Date().getTime()}
+                            width={100}
+                            height={100}
+                            onClick={eventAskAI}
+                            className='rounded-full object-contain'
+                        />
+                  </div>
+                </div>
+              </div>
+              </div>
       {searchedResults.length > 0 ? (
         <div>
               <div className='answer_card' >
@@ -211,7 +297,26 @@ const Feed = () => {
       data={searchedResults}
       handleTagClick={handleTagClick}/>
         </div>) : (
-        <div> Wpisz materiał z którym nie wiesz co zrobić </div>
+        <div>
+        <div className='answer_card' >
+          <div className='flex justify-between items-start gap-5'>
+            <div
+              className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+          
+            >
+              <div className='flex flex-col'>
+                <h3 className='font-satoshi font-semibold text-gray-900'>
+
+                </h3>
+                <p className='font-inter text-sm text-gray-500'>
+                Wpisz materiał z którym nie wiesz co zrobić...
+                </p>
+                
+              </div>
+            </div>
+            
+          </div>
+        </div> </div>
      )}
       
     </section>

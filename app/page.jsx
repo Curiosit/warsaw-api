@@ -11,10 +11,10 @@ const Home = () => {
                     className="object-contain spin"
                 />
       <h1 className="head_text text-center">
-       re/wars
+       re/wars.ai
         <br className="">
         </br>
-        <span className="green_gradient text-center">Gdzie wyrzucić?</span>
+        <span className="green_gradient text-center">zapytaj jak wykorzystać dany materiał ponownie</span>
       </h1>
       <p className="desc text-center">
       </p>
