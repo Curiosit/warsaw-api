@@ -14,9 +14,9 @@ const Home = () => {
        re/wars.ai
         <br className="">
         </br>
-        <span className="green_gradient text-center">zapytaj jak wykorzystać dany materiał ponownie</span>
+        
       </h1>
-      <p className="desc text-center">
+      <p className="desc text-center">co z zrobić z odpadami? jak je wykorzystać ponownie? do którego kontenera wyrzucić?
       </p>
      <Feed />
     </section>
