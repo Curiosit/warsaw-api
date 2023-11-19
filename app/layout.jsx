@@ -1,15 +1,19 @@
 import '@styles/globals.css';
 
+
 import Nav from '@components/Nav';
 import Provider from '@components/Provider';
-
+import 'bootstrap/dist/css/bootstrap.css'
 
 export const metadata = {
   title: "re/wars.ai",
   description: "użyj ponownie! wszystko!"
 }
 
+
+
 const RootLayout = ({children}) => {
+  
   return (
     <html lang="en">
       <head>
@@ -24,14 +28,55 @@ const RootLayout = ({children}) => {
           <div className="gradient">
           </div>
         </div>
-
+        
 
         <main className="app">
           <Nav />
+          <div class="align-self-end">
+                                      
+                                      <button type="button" class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        ?
+                                      </button>
+        </div>        
           {children}
 
         </main>
         </Provider>
+        
+                                      
+                                      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h5 class="modal-title" id="exampleModalLabel">czym jest re/wars.ai?</h5>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              Aby skorzystać z aplikacji należy w pasku wyszukiwania wpisać nazwę odpadu z którym nie wiadomo co zrobić. Strona automatycznie zacznie wyszukiwać możliwe produkty poprzez API. Aby skorzystać z pomocy bota należy kliknąć ikonę po prawej.
+
+                                            </div>
+
+                                            <div class="modal-body">
+                                              re/wars.ai to projekt stworzony na hackathon <a href="https://dataforcity.pl/" data-bs-toggle="tooltip" title="dataforcity.pl">Data for City</a>
+
+
+                                            </div>
+                                            <div class="modal-body">
+                                              Strona wykorzystuje dane dostępne z API <a href="https://api.um.warszawa.pl/" data-bs-toggle="tooltip" title="api.um.warszawa.pl">Otwarte dane - czyli dane po warszawsku</a> umozliwiając użytkownikowi przyporządkowanie podanego odpadu do konkretnej kategorii z API.
+
+                                            </div>
+                                            <div class="modal-body">
+                                              Strona wykorzystuje także API ChatGPT do zasugerowania możliwych ponownych zastosowań dla podanych odpadów.
+
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                          
       </body>
     </html>
     

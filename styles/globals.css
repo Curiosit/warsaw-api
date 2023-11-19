@@ -137,7 +137,9 @@ body {
 .quote_btn {
   @apply w-12 h-12 rounded-full   flex justify-center items-center cursor-pointer;
 }
-
+.ai_btn {
+  @apply w-20 h-20    flex justify-center items-center cursor-pointer;
+}
 .glassmorphism {
   @apply rounded-xl border border-gray-200 bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur p-5;
 }
@@ -208,6 +210,56 @@ body {
   }
   100%{
       transform: rotate(360deg);
+  }
+}
+
+
+.spin2 {
+  
+  
+  -webkit-animation-name: spin2;
+  -webkit-animation-duration: 4000ms;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  -moz-animation-name: spin2;
+  -moz-animation-duration: 4000ms;
+  -moz-animation-iteration-count: infinite;
+  -moz-animation-timing-function: linear;
+  -ms-animation-name: spin2;
+  -ms-animation-duration: 4000ms;
+  -ms-animation-iteration-count: infinite;
+  -ms-animation-timing-function: linear;
+  
+  animation-name: spin2;
+  animation-duration: 4000ms;
+  animation-iteration-count: infinite;
+  
+  animation-timing-function: ease-in-out;
+}
+@-ms-keyframes spin2 {
+  from { -ms-transform: rotate(0deg); }
+  to { -ms-transform: rotate(360deg); }
+}
+@-moz-keyframes spin2 {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin2 {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(180deg); }
+}
+@keyframes spin2 {
+  0% {
+      transform: rotate(0deg);
+  }
+  15% {
+      transform: rotate(10deg);
+  }
+  30% {
+    transform: rotate(-10deg);
+  }
+  100%{
+      transform: rotate(0deg);
   }
 }
 

@@ -42,6 +42,7 @@ const Feed = () => {
   const [searchedResults, setSearchedResults] = useState([]);
   const [mostCommonType, setMostCommonType] = useState("");
   const [moreTypes, setMoreTypes] = useState(false);
+  const [shouldRender, setShouldRender] = useState(false);
   const [imagePath, setImagePath] = useState("zmieszane.png");
   const handleSearchChange = async (e) => {
     setSearchText(e.target.value);
@@ -53,6 +54,12 @@ const Feed = () => {
     setSearchedResults(searchResult);
     setImagePath(switchImagePath(findMostCommonType(searchResult)));
     console.log(imagePath);
+    setShouldRender(searchText.length > 0 && searchResult.length > 0);
+    console.log(searchText.length > 0);
+    console.log(searchResult.length > 0);
+    console.log(shouldRender);
+    console.log(searchText);
+    console.log(searchResult)
   };
   const handleTagClick = (tagName) => {
     
@@ -66,18 +73,26 @@ const Feed = () => {
   }, [searchedResults]);
 
   const fetchData = async (q) => {
-    try {
-      console.log("try fetching rewars query");
-      const query = "https://api.um.warszawa.pl/api/action/datastore_search/?resource_id=64b9d66c-d134-4a87-9f24-258676e9e498&limit=5&q=" + q
-      console.log(query);
-      const promise = (await fetch(query));
-      const answers = await promise.json();
-      //const data = JSON.parse(answers);
-      const data = JSON.parse(JSON.stringify(answers));
-      console.log(data.result.records);
-      return new Response(JSON.stringify(data.result.records),{ status: 200 } )
+    if(q.length > 0) {
 
-    } catch (error) {
+      
+      try {
+        console.log("try fetching rewars query");
+        const query = "https://api.um.warszawa.pl/api/action/datastore_search/?resource_id=64b9d66c-d134-4a87-9f24-258676e9e498&limit=5&q=" + q
+        console.log(query);
+        const promise = (await fetch(query));
+        const answers = await promise.json();
+        //const data = JSON.parse(answers);
+        const data = JSON.parse(JSON.stringify(answers));
+        console.log(data.result.records);
+        return new Response(JSON.stringify(data.result.records),{ status: 200 } )
+
+      } catch (error) {
+        return new Response ("Nie udało się zadać pytania", {status: 500})
+      }
+    }
+    else {
+      console.log("Za krótkie zapytanie!")
       return new Response ("Nie udało się zadać pytania", {status: 500})
     }
   }
@@ -242,21 +257,21 @@ const Feed = () => {
                       
                     </div>
                   </div>
-                  <div className='quote_btn' >
+                  <div className='ai_btn' >
                         <Image
                             src={"/images/aibot.png"}
                             alt='user_image'
                             key={new Date().getTime()}
-                            width={100}
-                            height={100}
+                            width={150}
+                            height={150}
                             onClick={eventAskAI}
-                            className='rounded-full object-contain'
+                            className='rounded-full object-contain spin2'
                         />
                   </div>
                 </div>
               </div>
               </div>
-      {searchedResults.length > 0 ? (
+      {shouldRender ? (
         <div>
               <div className='answer_card' >
                 <div className='flex justify-between items-start gap-5'>
@@ -296,7 +311,28 @@ const Feed = () => {
       <ProductCardList
       data={searchedResults}
       handleTagClick={handleTagClick}/>
-        </div>) : (
+        </div>) : <>{searchText.length>0 ? (
+          <div>
+          <div className='answer_card' >
+            <div className='flex justify-between items-start gap-5'>
+              <div
+                className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+            
+              >
+                <div className='flex flex-col'>
+                  <h3 className='font-satoshi font-semibold text-gray-900'>
+  
+                  </h3>
+                  <p className='font-inter text-sm text-gray-500'>
+                  Na razie nie udało się znaleźć takiego produktu, wpisz pełną nazwę...
+                  </p>
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div> </div>
+        ):(
         <div>
         <div className='answer_card' >
           <div className='flex justify-between items-start gap-5'>
@@ -316,8 +352,8 @@ const Feed = () => {
             </div>
             
           </div>
-        </div> </div>
-     )}
+        </div> </div>)
+     }</>}
       
     </section>
   )

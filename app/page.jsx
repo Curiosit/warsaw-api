@@ -1,7 +1,11 @@
-
+"use client"
 import Feed from "@components/Feed"
 import Image from 'next/image'
+import { useEffect } from "react";
 const Home = () => {
+  useEffect(() => {
+    import("bootstrap/dist/js/bootstrap");
+  }, []);
   return (
     <section className="w-full flex-center flex-col">
       <Image src="/images/logo.png"
