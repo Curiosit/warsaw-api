@@ -35,31 +35,45 @@ const ProductCardList = ({ data, handleTagClick}) => {
 
 const Feed = () => {
   
-
+  var i = 0;
+  var respText = ''
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState("");
+  
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchedResults, setSearchedResults] = useState([]);
   const [mostCommonType, setMostCommonType] = useState("");
   const [moreTypes, setMoreTypes] = useState(false);
   const [shouldRender, setShouldRender] = useState(false);
+  const [inputSomething, setInputSomething] = useState(false);
+  const [aiResponse, setAiResponse] = useState(0); // 0 brak pytania, 1 czekamy, 2 gotowe!
   const [imagePath, setImagePath] = useState("zmieszane.png");
   const handleSearchChange = async (e) => {
+    console.log(e.target.value)
     setSearchText(e.target.value);
     
+    console.log(e.target.value.length);
+    if (e.target.value.length > 2) {
     const searchResult = await filterProducts(e.target.value);
     setMostCommonType(findMostCommonType(searchResult))
     console.log(searchResult);
     console.log(mostCommonType);
     setSearchedResults(searchResult);
+    
     setImagePath(switchImagePath(findMostCommonType(searchResult)));
     console.log(imagePath);
-    setShouldRender(searchText.length > 0 && searchResult.length > 0);
-    console.log(searchText.length > 0);
-    console.log(searchResult.length > 0);
+    setInputSomething(e.target.value.length > 1);
+    setShouldRender(e.target.value.length > 0 && searchResult.length > 0);
+    
+    
     console.log(shouldRender);
-    console.log(searchText);
+    
     console.log(searchResult)
+    }
+    else {
+      setInputSomething(false);
+      setShouldRender(false);
+    }
   };
   const handleTagClick = (tagName) => {
     
@@ -72,13 +86,17 @@ const Feed = () => {
     
   }, [searchedResults]);
 
+  
+
+
+  
   const fetchData = async (q) => {
     if(q.length > 0) {
 
       
       try {
         console.log("try fetching rewars query");
-        const query = "https://api.um.warszawa.pl/api/action/datastore_search/?resource_id=64b9d66c-d134-4a87-9f24-258676e9e498&limit=5&q=" + q
+        const query = "https://api.um.warszawa.pl/api/action/datastore_search/?resource_id=64b9d66c-d134-4a87-9f24-258676e9e498&limit=10&q=" + q
         console.log(query);
         const promise = (await fetch(query));
         const answers = await promise.json();
@@ -97,6 +115,7 @@ const Feed = () => {
     }
   }
   const filterProducts = async (searchtext) => {
+    
     console.log("filter");
     const response = await fetchData(searchtext);
     
@@ -106,6 +125,7 @@ const Feed = () => {
     const result = JSON.parse(JSON.stringify(data));
     console.log(result);
     return result
+    
   };
   const filterProducts2 = async (searchtext) => {
     console.log("filter");
@@ -181,6 +201,7 @@ const Feed = () => {
       }
   
     }
+    setAiResponse(1);
     const apiAIUrl = 'https://cyz7bkwwhl.execute-api.us-west-2.amazonaws.com/production/askai';
     var description = '';
     description = searchText;
@@ -193,29 +214,58 @@ const Feed = () => {
     const jsonQuestion = JSON.stringify(question);
     const jsonBody = JSON.stringify({body : question});
     console.log(jsonQuestion);
-    responsefield.innerHTML = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...";
+    i = 0;
+    
+    document.getElementById("airesponse").innerHTML = '';
+    respText = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...";
+    
+    console.log(respText);
+    typeWriter();
+    
+    //responsefield.innerHTML = ;
     const response = await fetch(apiAIUrl, {method: 'POST', body: jsonQuestion}, headers);
     console.log(response);
-    var body = await response.text();
+    const body = await response.text();
     console.log(body);
-    
-    responsefield.innerHTML = body;
+    respText = body;
+    i = 0;
+    setAiResponse(2);
+    document.getElementById("airesponse").innerHTML = '';
+    typeWriter()
+    //responsefield.innerHTML = body;
   }
+  function typeWriter() {
+    const txt = respText;
+    console.log(txt)
+    console.log(txt.charAt(i))
+    console.log(i)
+    if (i < txt.length) {
+      
+      
+      document.getElementById("airesponse").innerHTML += txt.charAt(i);
+      i++;
+      setTimeout(function() {
 
+        typeWriter();
+    
+    }, 60);
+      
+    }
+  }
   function generatePrompt () {
-    const rand = getRandomInt(1);
+    const rand = getRandomInt(5);
     console.log(rand);
         if (rand == 0) {
-            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie jako coś przydatnego: ";
             
         } else if (rand == 1) {
-            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            return " Jak poddać ten produkt recyklingowi w dwóch zdaniach: ";
         } else if (rand == 2) {
-            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            return " Podpowiedz co zrobić z tym materiałem aby znaleźć dla niego nowy użytek w warunkach domowych: ";
         } else if (rand == 3) {
-            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            return " Napisz kilka porad jak można to wykorzystać jeszcze raz w duchu zero waste: ";
         } else if (rand == 4) {
-            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
+            return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie aby nie tworzyć odpadów: ";
         }else {
             return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie: ";
         }
@@ -230,17 +280,21 @@ const Feed = () => {
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
-        <input type="text"
-        placeholder="produkt..."
-        value={searchText} 
-        required
-        onChange={handleSearchChange}
-        className="search_input peer"
-        />
+      
+      
 
-      </form>
-      <div>
+          <form className="relative w-full flex-center">
+              <input type="text"
+              placeholder="Wpisz materiał z którym nie wiesz co zrobić..."
+              value={searchText} 
+              required
+              onChange={handleSearchChange}
+              className="search_input peer"
+              />
+
+          </form>
+      
+          {inputSomething ? (
               <div className='answer_card' >
                 <div className='flex justify-between items-start gap-5'>
                   <div
@@ -251,7 +305,7 @@ const Feed = () => {
                       <h3 className='font-satoshi font-semibold text-gray-900'>
 
                       </h3>
-                      <p id="airesponse" className='font-inter text-sm text-gray-500'>
+                      <p id="airesponse" className='font-inter text-sm text-gray-700'>
                       Zapytaj bota re/wars.ai o poradę jak ponownie wykorzystać ten materiał - klikając w obrazek po prawej!
                       </p>
                       
@@ -270,7 +324,8 @@ const Feed = () => {
                   </div>
                 </div>
               </div>
-              </div>
+              ) : (<div></div>)}
+            
       {shouldRender ? (
         <div>
               <div className='answer_card' >
@@ -311,7 +366,7 @@ const Feed = () => {
       <ProductCardList
       data={searchedResults}
       handleTagClick={handleTagClick}/>
-        </div>) : <>{searchText.length>0 ? (
+        </div>) : <>{inputSomething ? (
           <div>
           <div className='answer_card' >
             <div className='flex justify-between items-start gap-5'>
@@ -334,25 +389,8 @@ const Feed = () => {
           </div> </div>
         ):(
         <div>
-        <div className='answer_card' >
-          <div className='flex justify-between items-start gap-5'>
-            <div
-              className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
-          
-            >
-              <div className='flex flex-col'>
-                <h3 className='font-satoshi font-semibold text-gray-900'>
-
-                </h3>
-                <p className='font-inter text-sm text-gray-500'>
-                Wpisz materiał z którym nie wiesz co zrobić...
-                </p>
-                
-              </div>
-            </div>
-            
-          </div>
-        </div> </div>)
+        
+        </div> )
      }</>}
       
     </section>

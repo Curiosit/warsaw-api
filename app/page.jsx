@@ -20,8 +20,7 @@ const Home = () => {
         </br>
         
       </h1>
-      <p className="desc text-center">co z zrobić z odpadami? jak je wykorzystać ponownie? do którego kontenera wyrzucić?
-      </p>
+      
      <Feed />
     </section>
   )
