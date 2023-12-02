@@ -8,11 +8,15 @@ const ProductSchema = new Schema ( {
     },
     Synonim: {
         type: String,
-        required: [true, 'Synonim is required.'],
+        
     },
     Typ: {
         type: String,
         required: [true, 'Typ is required.'],
+    },
+    Tak: {
+        type: String,
+        
     }
 })
 

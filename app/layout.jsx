@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 export const metadata = {
   title: "re/wars.ai",
-  description: "użyj ponownie! wszystko!"
+  description: "nie wyrzucaj! użyj ponownie!"
 }
 
 
