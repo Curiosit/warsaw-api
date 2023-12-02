@@ -69,6 +69,10 @@ const RootLayout = ({children}) => {
                                               Strona wykorzystuje także API ChatGPT do zasugerowania możliwych ponownych zastosowań dla podanych odpadów.
 
                                             </div>
+                                            <div class="modal-body">
+                                              Kontakt: mailingbot[at]gmail.com
+
+                                            </div>
                                             <div class="modal-footer">
                                               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
                                               

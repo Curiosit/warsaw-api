@@ -5,9 +5,7 @@ import ProductCard from './ProductCard';
 import Image from "next/image";
 const ProductCardList = ({ data, handleTagClick}) => {
   
-  console.log("mapping");
-  
-  console.log(data);
+
   if(data){
     return (
       <div className="mt-0 prompt_layout">
@@ -49,26 +47,25 @@ const Feed = () => {
   const [aiResponse, setAiResponse] = useState(0); // 0 brak pytania, 1 czekamy, 2 gotowe!
   const [imagePath, setImagePath] = useState("zmieszane.png");
   const handleSearchChange = async (e) => {
-    console.log(e.target.value)
+    
     setSearchText(e.target.value);
     
-    console.log(e.target.value.length);
+
     if (e.target.value.length > 2) {
     const searchResult = await filterProducts(e.target.value);
     setMostCommonType(findMostCommonType(searchResult))
-    console.log(searchResult);
-    console.log(mostCommonType);
+    
     setSearchedResults(searchResult);
     
     setImagePath(switchImagePath(findMostCommonType(searchResult)));
-    console.log(imagePath);
+
     setInputSomething(e.target.value.length > 1);
     setShouldRender(e.target.value.length > 0 && searchResult.length > 0);
     
     
-    console.log(shouldRender);
+
     
-    console.log(searchResult)
+
     }
     else {
       setInputSomething(false);
@@ -81,7 +78,7 @@ const Feed = () => {
 
   useEffect(() => {
     
-    console.log(searchedResults);
+
     
     
   }, [searchedResults]);
@@ -95,14 +92,14 @@ const Feed = () => {
 
       
       try {
-        console.log("try fetching rewars query");
+
         const query = "https://api.um.warszawa.pl/api/action/datastore_search/?resource_id=64b9d66c-d134-4a87-9f24-258676e9e498&limit=10&q=" + q
         console.log(query);
         const promise = (await fetch(query));
         const answers = await promise.json();
         //const data = JSON.parse(answers);
         const data = JSON.parse(JSON.stringify(answers));
-        console.log(data.result.records);
+
         return new Response(JSON.stringify(data.result.records),{ status: 200 } )
 
       } catch (error) {
@@ -116,31 +113,31 @@ const Feed = () => {
   }
   const filterProducts = async (searchtext) => {
     
-    console.log("filter");
+
     const response = await fetchData(searchtext);
     
-    console.log(response);
+
     const data = await response.json();
-    console.log(data);
+
     const result = JSON.parse(JSON.stringify(data));
-    console.log(result);
+
     return result
     
   };
   const filterProducts2 = async (searchtext) => {
-    console.log("filter");
+
     const response = await fetch('/api/search/'+searchtext);
     
-    console.log(response);
+
     const data = await response.json();
-    console.log(data);
+
     const result = JSON.parse(JSON.stringify(data));
-    console.log(result);
+
     return result
   };
 
   function switchImagePath(value) {
-    console.log(value)
+
     switch (value) {
       case "Papier":
         return "papier.png";
@@ -164,7 +161,7 @@ const Feed = () => {
     // Iterate through the JSON data
     data.forEach(function (entry) {
       const type = entry.Typ;
-      console.log(type);
+
       // If the type is not in the count object, initialize it with a count of 1
       if (!typeCount[type]) {
         typeCount[type] = 1;
@@ -187,8 +184,7 @@ const Feed = () => {
     // Check if there is more than one type
     const uniqueTypes = Object.keys(typeCount).length;
     setMoreTypes(uniqueTypes > 1);
-    console.log(uniqueTypes);
-    console.log(mostCommonType);
+
     return mostCommonType;
   }
 
@@ -213,20 +209,20 @@ const Feed = () => {
     const question = { "question": ask};
     const jsonQuestion = JSON.stringify(question);
     const jsonBody = JSON.stringify({body : question});
-    console.log(jsonQuestion);
+
     i = 0;
     
     document.getElementById("airesponse").innerHTML = '';
     respText = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...";
     
-    console.log(respText);
+
     typeWriter();
     
     //responsefield.innerHTML = ;
     const response = await fetch(apiAIUrl, {method: 'POST', body: jsonQuestion}, headers);
-    console.log(response);
+
     const body = await response.text();
-    console.log(body);
+
     respText = body;
     i = 0;
     setAiResponse(2);
@@ -236,9 +232,7 @@ const Feed = () => {
   }
   function typeWriter() {
     const txt = respText;
-    console.log(txt)
-    console.log(txt.charAt(i))
-    console.log(i)
+
     if (i < txt.length) {
       
       
@@ -254,7 +248,7 @@ const Feed = () => {
   }
   function generatePrompt () {
     const rand = getRandomInt(5);
-    console.log(rand);
+
         if (rand == 0) {
             return " Napisz bardzo krótko, jak wykorzystać ten materiał ponownie jako coś przydatnego: ";
             
