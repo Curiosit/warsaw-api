@@ -213,7 +213,7 @@ const Feed = () => {
     i = 0;
     
     document.getElementById("airesponse").innerHTML = '';
-    respText = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...";
+    respText = "re/wars.ai analizuje twoje pytanie... poczekaj sekundę...................................................................................................................................................";
     
 
     typeWriter();

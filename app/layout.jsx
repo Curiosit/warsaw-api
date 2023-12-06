@@ -57,12 +57,12 @@ const RootLayout = ({children}) => {
                                             </div>
 
                                             <div class="modal-body">
-                                              re/wars.ai to projekt stworzony na hackathon <a href="https://dataforcity.pl/" data-bs-toggle="tooltip" title="dataforcity.pl">Data for City</a>
+                                              re/wars.ai to projekt stworzony na hackathon <b><a href="https://dataforcity.pl/" data-bs-toggle="tooltip" title="dataforcity.pl">Data for City</a></b>
 
 
                                             </div>
                                             <div class="modal-body">
-                                              Strona wykorzystuje dane dostępne z API <a href="https://api.um.warszawa.pl/" data-bs-toggle="tooltip" title="api.um.warszawa.pl">Otwarte dane - czyli dane po warszawsku</a> umozliwiając użytkownikowi przyporządkowanie podanego odpadu do konkretnej kategorii z API.
+                                              Strona wykorzystuje dane dostępne z API <b><a href="https://api.um.warszawa.pl/" data-bs-toggle="tooltip" title="api.um.warszawa.pl">Otwarte dane - czyli dane po warszawsku</a></b> umozliwiając użytkownikowi przyporządkowanie podanego odpadu do konkretnej kategorii z API.
 
                                             </div>
                                             <div class="modal-body">
@@ -70,7 +70,11 @@ const RootLayout = ({children}) => {
 
                                             </div>
                                             <div class="modal-body">
-                                              Kontakt: mailingbot[at]gmail.com
+                                              Kod strony został udostęniony na zasadzie open-source na platformie <b><a href="https://github.com/Curiosit/warsaw-api" data-bs-toggle="tooltip" title="api.um.warszawa.pl">github</a></b>
+                                              
+                                            </div>
+                                            <div class="modal-body">
+                                              Kontakt: contact[at]slad.ai
 
                                             </div>
                                             <div class="modal-footer">
