@@ -2,6 +2,7 @@
 ## re/wars.ai
 
 This is a simple Next.js project, using Warsaw City API data for trash categories, and OpenAI ChatGPT API for recycling suggestions.
+![image](https://github.com/Curiosit/warsaw-api/assets/17218693/ee7ab568-bab5-493a-b7b7-0a3e1d7bcd72)
 
 
 ## Running this Next.js project
